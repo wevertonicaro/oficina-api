@@ -1,6 +1,7 @@
 import { Car } from "src/modules/cars/entities/car.entity";
-import { Column, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity('parts')
 export class Part {
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,6 +18,6 @@ export class Part {
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     price: number;
 
-    @ManyToMany(() => Car, car => car.id)
-    carId: number;
+    @ManyToOne(() => Car, (car) => car.id)
+    car: Car;
 }

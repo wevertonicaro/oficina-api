@@ -22,7 +22,15 @@ export class OrderServiceService {
 
     @InjectRepository(Part)
     private partRepository: Repository<Part>,
+
+    
   ) {}
+  
+  private calculateTotal(parts: Part[]): number {
+    return parts.reduce((sum, part) => {
+      return sum + Number(part.price);
+    }, 0);
+  }
 
   async create(createOrderServiceDto: CreateOrderServiceDto) {
     const { carId, employeeId, partIds, description } =
@@ -49,11 +57,14 @@ export class OrderServiceService {
         'Algumas peças não foram encontradas',
       );
 
+    const total = this.calculateTotal(parts);
+
     const orderService = this.orderServiceRepository.create({
       description,
       car,
       employee,
       parts,
+      total,
     });
 
     return this.orderServiceRepository.save(orderService);

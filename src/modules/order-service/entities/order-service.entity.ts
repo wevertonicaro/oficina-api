@@ -23,10 +23,13 @@ export class OrderService {
   @Column({ type: 'enum', enum: ['pending', 'in_progress', 'completed', 'canceled'], default: 'pending' })
   status: string;
 
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  total: number;
+
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp'})
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @ManyToOne(() => Car, (car) => car.id)

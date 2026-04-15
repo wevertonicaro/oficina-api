@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
+import { TypeOrmLogger } from './typeorm-logger';
 
 @Module({
   imports: [
@@ -14,8 +15,12 @@ import { ConfigService } from '@nestjs/config';
         password: config.get<string>('DB_PASS'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: true,
-      }),
+
+        synchronize: false,
+
+        logger: new TypeOrmLogger(),
+        logging: true,
+      })
     }),
   ],
 })

@@ -28,8 +28,8 @@ export class PartsService {
     return this.partsRepository.findOne({ where: { code } });
   }
 
-  findByCarId(carId: number) {
-    return this.partsRepository.find({ where: { carId } });
+  findByCarId(car: number) {
+    return this.partsRepository.find({ where: { car: { id: car } } });
   }
 
   update(id: number, updatePartDto: UpdatePartDto) {

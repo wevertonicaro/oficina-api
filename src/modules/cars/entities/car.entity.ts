@@ -1,6 +1,7 @@
 import { Client } from "src/modules/clients/entities/client.entity";
-import { Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity('cars')
 export class Car {
     @PrimaryGeneratedColumn()
     id: number;
